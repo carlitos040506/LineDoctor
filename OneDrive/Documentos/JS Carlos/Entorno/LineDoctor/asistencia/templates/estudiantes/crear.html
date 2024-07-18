@@ -1,0 +1,20 @@
+{% extends 'plantilla.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h2>{{ title }}</h2>
+        </div>
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
+                {% include 'estudiantes/form.html' %}
+                <button type="submit" class="btn btn-success">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

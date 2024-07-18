@@ -1,0 +1,8 @@
+<div class="mb-3">
+    <label for="nombre" class="form-label">Nombre</label>
+    <input type="text" class="form-control" id="nombre" name="nombre" value="{{ form.nombre.value|default:'' }}">
+</div>
+<div class="mb-3">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email" name="email" value="{{ form.email.value|default:'' }}">
+</div>
