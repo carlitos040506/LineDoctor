@@ -56,12 +56,21 @@ ROOT_URLCONF = 'LineDoctor.urls'
 
 
 
+<<<<<<< HEAD
 
+=======
+import os
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+>>>>>>> e63d76852051e20e929554978d47a01273c5b537
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
+<<<<<<< HEAD
         'DIRS': [],
+=======
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+>>>>>>> e63d76852051e20e929554978d47a01273c5b537
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
