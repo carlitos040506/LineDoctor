@@ -18,3 +18,6 @@ def crear(request):
 
 def editar(request):
     return render(request, 'estudiantes/editar.html')
+
+def registro(request):
+    return render(request, 'paginas/registro.html')

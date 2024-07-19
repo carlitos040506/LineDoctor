@@ -1,0 +1,208 @@
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="estilos.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background: linear-gradient(150deg, #00384a, #58F0CE);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .formulario {
+            background: rgb(179, 201, 227);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+
+        .formulario h1 {
+            text-align: center;
+            padding-bottom: 20px;
+            border-bottom: 1px solid  #525050;
+        }
+
+        .formulario form {
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .form-group {
+            position: relative;
+            border-bottom: 2px solid #525050;
+            margin: 30px 0;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0 5px;
+            height: 40px;
+            font-size: 16px;
+            border: none;
+            background: none;
+            outline: none;
+        }
+
+        .form-group label {
+            position: absolute;
+            top: 50%;
+            left: 5px;
+            color: #525050;
+            transform: translateY(-50%);
+            font-size: 16px;
+            pointer-events: none;
+            transition: .5s;
+        }
+
+        .form-group span::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: #90dcb1;
+            transition: .5s;
+        }
+
+        .form-control:focus ~ label,
+        .form-control:valid ~ label {
+            top: -5px;
+            color: #78d2bf;
+        }
+
+        .form-control:focus ~ span::before,
+        .form-control:valid ~ span::before {
+            width: 100%;
+        }
+
+        .recordar {
+            margin: -5px 0 20px 5px;
+            color: blue;
+            cursor: pointer;
+        }
+
+        .recordar:hover {
+            text-decoration: underline;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            height: 50px;
+            border: 1px solid;
+            background: #43caad;
+            border-radius: 25px;
+            font-size: 18px;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            outline: none;
+        }
+
+        input[type="submit"]:hover {
+            border-color: rgb(68, 200, 184);
+            transition: .5s;
+        }
+
+        .registrarse a {
+            color: blue;
+            text-decoration: none;
+        }
+
+        .registrarse a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="formulario">
+        <h1>Registro</h1>
+        <form action="" method="POST" id="form">
+            <div class="form-group username">
+                <input type="text" class="form-control" id="nombres" required>
+                <label for="nombres">Nombres</label>
+                <span class="barra"></span>
+            </div>
+            <div class="form-group username">
+                <input type="text" class="form-control" id="apellidos" required>
+                <label for="apellidos">Apellidos</label>
+                <span class="barra"></span>
+            </div>
+            <div class="form-group">
+                <label for="fecha"></label>
+                <div class="d-flex">
+                    <select class="form-control mr-2" id="dia">
+                        <!-- Días del 1 al 31 -->
+                        <script>
+                            for (let i = 1; i <= 31; i++) {
+                                document.write('<option>' + i + '</option>');
+                            }
+                        </script>
+                    </select>
+                    <select class="form-control mr-2" id="mes">
+                        <option value="1">enero</option>
+                        <option value="2">febrero</option>
+                        <option value="3">marzo</option>
+                        <option value="4">abril</option>
+                        <option value="5">mayo</option>
+                        <option value="6">junio</option>
+                        <option value="7">julio</option>
+                        <option value="8">agosto</option>
+                        <option value="9">septiembre</option>
+                        <option value="10">octubre</option>
+                        <option value="11">noviembre</option>
+                        <option value="12">diciembre</option>
+                    </select>
+                    <select class="form-control" id="año">
+                        <!-- Años desde 1900 hasta el presente -->
+                        <script>
+                            const currentYear = new Date().getFullYear();
+                            for (let i = 1900; i <= currentYear; i++) {
+                                document.write('<option>' + i + '</option>');
+                            }
+                        </script>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group username">
+                <input type="text" class="form-control" id="usuario" required>
+                <label for="usuario">Nombre de Usuario</label>
+                <span class="barra"></span>
+            </div>
+            <div class="form-group username">
+                <input type="email" class="form-control" id="email" required>
+                <label for="email">Email</label>
+                <span class="barra"></span>
+            </div>
+            <div class="form-group username">
+                <input type="password" class="form-control" id="password" required>
+                <label for="password">Crea una Contraseña</label>
+                <span class="barra"></span>
+            </div>
+            <div class="form-group username">
+                <input type="password" class="form-control" id="confirm_password" required>
+                <label for="confirm_password">Confirma la Contraseña</label>
+                <span class="barra"></span>
+            </div>
+            <input type="submit" value="Registrar">
+            <div class="text-center mt-3 registrarse">
+                Quiero <a href="#">Iniciar Sesión</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}
