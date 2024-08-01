@@ -21,3 +21,12 @@ def editar(request):
 
 def registro(request):
     return render(request, 'paginas/registro.html')
+
+def login(request):
+    return render(request, 'paginas/login.html')
+
+def publicaciones(request):
+    return render(request, 'estudiantes/publicaciones.html')
+
+def olvidocontraseña(request):
+    return render(request, 'paginas/olvidocontraseña.html')
