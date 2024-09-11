@@ -1,0 +1,154 @@
+{% extends "./base.html" %}
+{% block body %}
+<div class="row">
+  <!-- Columna para el formulario de gestión de pacientes -->
+  <div class="col-sm-12 col-md-6">
+    <!-- Mostrar mensajes justo arriba del título -->
+    {% if messages %}
+    <div id="message-container" class="alert alert-success alert-dismissible fade show" role="alert">
+      {% for message in messages %}
+      {{ message }}
+      {% endfor %}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %}
+
+
+
+        <h2>Gestión de pacientes</h2>
+        <div class="card">
+          <div class="card-body">
+            <form action="/registrarpaciente/" method="POST">
+              {% csrf_token %}
+              <div class="form-group">
+                <input type="text" id="txtCedula" name="txtCedula" class="form-control" placeholder="Cédula" minlength="6" maxlength="10" required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txtNombre" name="txtNombre" class="form-control" placeholder="Nombre" maxlength="50" required />
+              </div>
+              <div class="form-group">
+                <input type="text" id="txtApellido" name="txtApellido" class="form-control" placeholder="Apellido" maxlength="50" required />
+              </div>
+              <div class="form-group">
+                <input type="email" id="txtEmail" name="txtEmail" class="form-control" placeholder="Email" maxlength="50" required />
+              </div>
+              <div class="form-group">
+                <p>Fecha de nacimiento:</p>
+                <label for="fecha"></label>
+                <div class="d-flex">
+                    <select class="form-control mr-2" id="numdia" name="numdia" required>
+                        <!-- Días del 1 al 31 -->
+                        <script>
+                            for (let i = 1; i <= 31; i++) {
+                                document.write('<option>' + i + '</option>');
+                            }
+                        </script>
+                    </select>
+                    <select class="form-control mr-2" id="nummes" name="nummes" required>
+                        <option value="1">enero</option>
+                        <option value="2">febrero</option>
+                        <option value="3">marzo</option>
+                        <option value="4">abril</option>
+                        <option value="5">mayo</option>
+                        <option value="6">junio</option>
+                        <option value="7">julio</option>
+                        <option value="8">agosto</option>
+                        <option value="9">septiembre</option>
+                        <option value="10">octubre</option>
+                        <option value="11">noviembre</option>
+                        <option value="12">diciembre</option>
+                    </select>
+                    <select class="form-control" id="numanio" name="numanio" required>
+                        <!-- Años desde 1900 hasta el presente -->
+                        <script>
+                            const currentYear = new Date().getFullYear();
+                            for (let i = 1900; i <= currentYear; i++) {
+                                document.write('<option>' + i + '</option>');
+                            }
+                        </script>
+                    </select>
+                </div>
+            </div>
+              
+              <div class="form-group">
+                <button type="submit" class="btn btn-success btn-block text-white">Guardar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Columna para la tabla de pacientes -->
+      <div class="col-sm-12 col-md-6">
+        <h1>Tabla de pacientes</h1>
+        <div class="table-responsive py-2">
+          <table class="table table-striped">
+            <thead> 
+              <tr>
+                <th>#</th>
+                <th>Cédula</th>
+                <th>Nombre</th>
+                <th>Apellidos</th>
+                <th>Email</th>
+                <th>Día de Nacimiento</th>
+                <th>Mes de Nacimiento</th>
+                <th>Año de Nacimiento</th>
+                <th colspan="2">Opciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for paciente in pacientes %}
+              <tr>
+                <td>{{ forloop.counter }}</td>
+                <td>{{ paciente.cedula }}</td>
+                <td>{{ paciente.nombre }}</td>
+                <td>{{ paciente.apellido }}</td>
+                <td>{{ paciente.email }}</td>
+                <td>{{ paciente.dia }}</td>
+                <td>{{ paciente.mes }}</td>
+                <td>{{ paciente.anio }}</td>
+                <td>
+                  <a href="edicionpaciente/{{paciente.cedula}}" class="btn btn-info">Editar</a>
+                  <a href="eliminarpaciente/{{paciente.cedula}}" class="btn btn-danger btn-eliminacion">Eliminar</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          const messageContainer = document.getElementById("message-container");
+          if (messageContainer) {
+            messageContainer.style.display = "none";
+          }
+        }, 5000);
+    
+        document.addEventListener("click", function (event) {
+          const messageContainer = document.getElementById("message-container");
+          if (messageContainer && !messageContainer.contains(event.target)) {
+            messageContainer.style.display = "none";
+          }
+        });
+    
+        const deleteButtons = document.querySelectorAll(".btn-eliminacion");
+        deleteButtons.forEach(function (button) {
+          button.addEventListener("click", function (event) {
+            const confirmed = confirm("¿Estás seguro de que deseas eliminar este paciente?");
+            if (!confirmed) {
+              event.preventDefault();
+            }
+          });
+        });
+      });
+    </script>
+
+   
+    
+{% endblock %}

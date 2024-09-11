@@ -1,0 +1,169 @@
+{% extends "./base.html" %} {% block body %}
+<div class="row">
+  <!-- Columna para el formulario de pacientes -->
+  <div class="col-md-6">
+    <!-- Mostrar mensajes justo arriba del título -->
+    {% if messages %}
+    <div
+      id="message-container"
+      class="alert alert-success alert-dismissible fade show"
+      role="alert"
+    >
+      {% for message in messages %} {{ message }} {% endfor %}
+      <button
+        type="button"
+        class="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    {% endif %}
+
+    <h2>Gestión de solicitudes</h2>
+    <div class="card">
+      <div class="card-body">
+        <form action="/registrarsolicitud/" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtCedula"
+              name="txtCedula"
+              class="form-control"
+              placeholder="Cédula"
+              minlength="6"
+              maxlength="10"
+              required
+            />
+          </div>
+
+          <div class="form-group username">
+            <p>Nivel de dolor(1-10):</p>
+            <label for="opciones"></label>
+            <select
+              type="number"
+              id="numniveldolor"
+              name="numniveldolor"
+              class="form-control"
+              placeholder="Nivel de dolor"
+              min="1"
+              max="10"
+              required
+            >
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="6">6</option>
+              <option value="7">7</option>
+              <option value="8">8</option>
+              <option value="9">9</option>
+              <option value="10">10</option>
+            </select>
+          </div>
+          <!-- Campo input Especialidad Requerida -->
+
+          <div class="form-group username">
+            <p>Especialidad Requerida:</p>
+            <label for="opciones"></label>
+            <select
+              type="text"
+              id="txtEspecialidad"
+              name="txtEspecialidad"
+              class="form-control"
+              placeholder="Especialidad Requerida"
+              maxlength="50"
+              required
+            >
+              <option value="pediatria">Pediatría</option>
+              <option value="ortopedia">Ortopedia</option>
+              <option value="odontologia">Odontología</option>
+              <option value="oftalmologia">Oftalmología</option>
+              <option value="hematologia">Hematología</option>
+              <option value="otorrinolaringologia">Otorrinolaringología</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-block text-white">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Columna para la tabla de pacientes -->
+  <div class="col-md-6">
+    <h1>Tabla de solicitudes</h1>
+    <div class="table-responsive py-2">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Cédula</th>
+            <th>Nivel de dolor</th>
+            <th>Especialidad requerida</th>
+            <th>Opciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for c in solicitudes %}
+          <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ c.cedula }}</td>
+            <td>{{ c.nivel_dolor }}</td>
+            <td>{{ c.especialidad }}</td>
+            <!-- Mostrar Especialidad -->
+            <td>
+              <a href="edicionsolicitud/{{c.cedula}}" class="btn btn-info"
+                >Editar</a
+              >
+              <a
+                href="eliminarsolicitud/{{c.cedula}}"
+                class="btn btn-danger btn-eliminacion"
+                >Eliminar</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts para manejo de alertas y confirmaciones -->
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    setTimeout(function () {
+      const messageContainer = document.getElementById("message-container");
+      if (messageContainer) {
+        messageContainer.style.display = "none";
+      }
+    }, 5000);
+
+    document.addEventListener("click", function (event) {
+      const messageContainer = document.getElementById("message-container");
+      if (messageContainer && !messageContainer.contains(event.target)) {
+        messageContainer.style.display = "none";
+      }
+    });
+
+    const deleteButtons = document.querySelectorAll(".btn-eliminacion");
+    deleteButtons.forEach(function (button) {
+      button.addEventListener("click", function (event) {
+        const confirmed = confirm(
+          "¿Estás seguro de que deseas eliminar este paciente?"
+        );
+        if (!confirmed) {
+          event.preventDefault();
+        }
+      });
+    });
+  });
+</script>
+{% endblock %}
