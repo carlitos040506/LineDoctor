@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicaciones</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .table-container {
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+        .table th, .table td {
+            vertical-align: middle;
+        }
+        .table th {
+            background-color: #343a40;
+            color: white;
+        }
+        .btn-edit {
+            background-color: #ffc107;
+            border: none;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+            border: none;
+        }
+        .btn-new {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Publicaciones</h1>
+        <div class="text-right mb-3">
+            <button class="btn btn-new" data-toggle="modal" data-target="#newModal">Nueva Publicación</button>
+        </div>
+        <div class="table-container">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Trabajo realizado</th>
+                        <th>Poster</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>JosePediatra</td>
+                        <td>Cirugía pediátrica avanzada, especializado en el tratamiento de enfermedades complejas en niños.</td>
+                        <td>Plática</td>
+                        <td><img src="https://8e93beb6.rocketcdn.me/storage/2023/03/pediatra-1024x634.jpg" alt="Poster JosePediatra" width="100"></td>
+                        <td>
+                            <button class="btn btn-edit" data-toggle="modal" data-target="#editModal" data-id="1" data-name="JosePediatra" data-description="Cirugía pediátrica avanzada, especializado en el tratamiento de enfermedades complejas en niños." data-genre="Plática">Editar</button>
+                            <button class="btn btn-delete" data-toggle="modal" data-target="#deleteModal" data-id="1" data-name="JosePediatra">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>LorenaMaxilofacial</td>
+                        <td>Cirugía maxilofacial, enfocada en procedimientos reconstructivos y estéticos faciales.</td>
+                        <td>Rinoplastia</td>
+                        <td><img src="https://staticnew-prod.topdoctors.cl/files/Image/large/52f61bb1df20a4c323a1803a7d5bedc7.jpg" alt="Poster LorenaMaxilofacial" width="100"></td>
+                        <td>
+                            <button class="btn btn-edit" data-toggle="modal" data-target="#editModal" data-id="2" data-name="LorenaMaxilofacial" data-description="Cirugía maxilofacial, enfocada en procedimientos reconstructivos y estéticos faciales." data-genre="Rinoplastia">Editar</button>
+                            <button class="btn btn-delete" data-toggle="modal" data-target="#deleteModal" data-id="2" data-name="LorenaMaxilofacial">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Diegofisioterapeuta</td>
+                        <td>Cirugía y rehabilitación fisioterapéutica, especializado en terapias para la recuperación de rodillas.</td>
+                        <td>TerapiaRodillas</td>
+                        <td><img src="https://hcbhospitales.com/wp-content/uploads/2022/09/fisioterapia-y-rehabilitacion.png" alt="Poster Diegofisioterapeuta" width="100"></td>
+                        <td>
+                            <button class="btn btn-edit" data-toggle="modal" data-target="#editModal" data-id="3" data-name="Diegofisioterapeuta" data-description="Cirugía y rehabilitación fisioterapéutica, especializado en terapias para la recuperación de rodillas." data-genre="TerapiaRodillas">Editar</button>
+                            <button class="btn btn-delete" data-toggle="modal" data-target="#deleteModal" data-id="3" data-name="Diegofisioterapeuta">Eliminar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Modal para Nuevo Registro -->
+    <div class="modal fade" id="newModal" tabindex="-1" aria-labelledby="newModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="newModalLabel">Nueva Publicación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="newForm">
+                        <div class="form-group">
+                            <label for="newName">Nombre</label>
+                            <input type="text" class="form-control" id="newName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newDescription">Descripción</label>
+                            <textarea class="form-control" id="newDescription" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="newGenre">Trabajo realizado</label>
+                            <input type="text" class="form-control" id="newGenre" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para Editar -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Editar Publicación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <div class="form-group">
+                            <label for="editName">Nombre</label>
+                            <input type="text" class="form-control" id="editName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editDescription">Descripción</label>
+                            <textarea class="form-control" id="editDescription" rows="3" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="editGenre">Trabajo realizado</label>
+                            <input type="text" class="form-control" id="editGenre" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+<p>yfyfjj</p>
+<p>hohohohohohh </p>
+    <!-- Modal para Confirmar Eliminación -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Eliminar Publicación</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>¿Estás seguro de que deseas eliminar esta publicación?</p>
+                    <p id="deleteMovieName"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Eliminar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $('#editModal').on('show.bs.modal'), function (event) {
+            var button = $(event.relatedTarget) 
+            var id = button.data('id')
+            var name = button.data('name') 
+            var description = button.data('description')
+
+        }

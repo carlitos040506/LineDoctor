@@ -3,18 +3,66 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <div class="card">
-        <div class="card-header">
-            <h2>{{ title }}</h2>
-        </div>
-        <div class="card-body">
-            <form method="post">
-                {% csrf_token %}
-                {% include 'estudiantes/form.html' %}
-                <button type="submit" class="btn btn-success">Guardar</button>
-            </form>
-        </div>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Bienvenidos a LineDocPatch!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #84abce;
+            color: #060606;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container-fluid {
+            background-color: #cad9f6;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 800px;
+        }
+        .btn-primary {
+            background-color: #409191;
+            border: none;
+        }
+        .btn-primary:hover {
+            background-color: #159363;
+        }
+        .sign-in-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        @media (max-width: 768px) {
+            .container-fluid {
+                padding: 20px;
+            }
+            .sign-in-btn {
+                position: static;
+                display: block;
+                margin: 10px auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <button class="btn btn-primary sign-in-btn">Iniciar Sesiòn</button>
+    <div class="container-fluid">
+        <h1 class="display-4 text-primary">¡Bienvenidos a LineDocPatch!</h1>
+        <p>¡Tu salud es nuestra prioridad!</p>
+        <p>Explora una vida más saludable, llena de bienestar y vitalidad, encontrando al mejor doctor.</p>
+        <button class="btn btn-primary">¡Explorar ahora!</button>
     </div>
-</div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
 {% endblock %}
