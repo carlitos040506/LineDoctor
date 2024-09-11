@@ -1,0 +1,62 @@
+{% extends "./base.html" %} {% block title %} Gestión de cursos {% endblock %}
+{% block body %}
+<div
+  class="d-flex justify-content-center align-items-center"
+  style="min-height: 80vh; margin-top: -50px"
+>
+  <div class="col-md-6 col-lg-4">
+    <h2 class="text-center">Edición de solicitudes</h2>
+    <div class="card shadow">
+      <div class="card-body">
+        <form action="/editarsolicitud/" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtCedula"
+              name="txtCedula"
+              value="{{solicitud.cedula}}"
+              class="form-control"
+              placeholder="Cédula"
+              minlength="6"
+              maxlength="10"
+              readonly
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtEspecialidad"
+              name="txtEspecialidad"
+              value="{{solicitud.especialidad}}"
+              class="form-control"
+              placeholder="Especialidad"
+              maxlength="50"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="number"
+              id="numniveldolor"
+              name="numniveldolor"
+              value="{{solicitud.nivel_dolor}}"
+              class="form-control"
+              min="1"
+              max="10"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-block text-white">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

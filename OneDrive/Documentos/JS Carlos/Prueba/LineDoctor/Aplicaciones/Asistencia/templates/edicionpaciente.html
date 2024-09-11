@@ -1,0 +1,111 @@
+{% extends "./base.html" %} {% block title %} Gestión de cursos {% endblock %}
+{% block body %}
+<div
+  class="d-flex justify-content-center align-items-center"
+  style="min-height: 80vh; margin-top: -50px"
+>
+  <div class="col-md-6 col-lg-4">
+    <h2 class="text-center">Edición de pacientes</h2>
+    <div class="card shadow">
+      <div class="card-body">
+        <form action="/editarpaciente/" method="POST">
+          {% csrf_token %}
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtCedula"
+              name="txtCedula"
+              value="{{paciente.cedula}}"
+              class="form-control"
+              minlength="6"
+              maxlength="10"
+              readonly
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtNombre"
+              name="txtNombre"
+              value="{{paciente.nombre}}"
+              class="form-control"
+              placeholder="Nombre"
+              maxlength="50"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtApellido"
+              name="txtApellido"
+              value="{{paciente.apellido}}"
+              class="form-control"
+              placeholder="Apellido"
+              maxlength="50"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <input
+              type="text"
+              id="txtEmail"
+              name="txtEmail"
+              value="{{paciente.email}}"
+              class="form-control"
+              placeholder="Email"
+              maxlength="50"
+              required
+            />
+          </div>
+          
+          <div class="form-group">
+            <p>Fecha de nacimiento:</p>
+            <label for="fecha"></label>
+            <div class="d-flex">
+                <select class="form-control mr-2" id="numdia" name="numdia" value="{{paciente.dia}}" required>
+                    <!-- Días del 1 al 31 -->
+                    <script>
+                        for (let i = 1; i <= 31; i++) {
+                            document.write('<option>' + i + '</option>');
+                        }
+                    </script>
+                </select>
+                <select class="form-control mr-2" id="nummes" name="nummes" value="{{paciente.mes}}" required>
+                    <option value="1">enero</option>
+                    <option value="2">febrero</option>
+                    <option value="3">marzo</option>
+                    <option value="4">abril</option>
+                    <option value="5">mayo</option>
+                    <option value="6">junio</option>
+                    <option value="7">julio</option>
+                    <option value="8">agosto</option>
+                    <option value="9">septiembre</option>
+                    <option value="10">octubre</option>
+                    <option value="11">noviembre</option>
+                    <option value="12">diciembre</option>
+                </select>
+                <select class="form-control" id="numanio" name="numanio" value="{{paciente.anio}}" required>
+                    <!-- Años desde 1900 hasta el presente -->
+                    <script>
+                        const currentYear = new Date().getFullYear();
+                        for (let i = 1900; i <= currentYear; i++) {
+                            document.write('<option>' + i + '</option>');
+                        }
+                    </script>
+                </select>
+            </div>
+        </div>
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-success btn-block text-white">
+              Guardar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
